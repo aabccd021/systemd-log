@@ -72,11 +72,11 @@
         text = ''
           repo_root=$(git rev-parse --show-toplevel)
 
+          NPM_CONFIG_TOKEN=''${NPM_CONFIG_TOKEN:-}
           if [ -z "$NPM_CONFIG_TOKEN" ]; then
             export NPM_CONFIG_USERCONFIG="$repo_root/.npmrc"
             auth_prefix="//registry.npmjs.org/:_authToken=npm_"
             if ! grep -q "^$auth_prefix" "$NPM_CONFIG_USERCONFIG"; then
-              echo "No NPM token found, running bunx npm login"
               bunx npm login
             fi
           fi
