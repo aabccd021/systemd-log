@@ -71,6 +71,16 @@
         ];
         text = ''
           repo_root=$(git rev-parse --show-toplevel)
+
+          if [ -z "$NPM_CONFIG_TOKEN" ]; then
+            export NPM_CONFIG_USERCONFIG="$repo_root/.npmrc"
+            auth_prefix="//registry.npmjs.org/:_authToken=npm_"
+            if ! grep -q "^$auth_prefix" "$NPM_CONFIG_USERCONFIG"; then
+              echo "No NPM token found, running bunx npm login"
+              bunx npm login
+            fi
+          fi
+
           current_version=$(jq -r .version "$repo_root/package.json")
           name=$(jq -r .name "$repo_root/package.json")
           published_version=$(curl -s "https://registry.npmjs.org/$name" | jq -r '.["dist-tags"].latest')
