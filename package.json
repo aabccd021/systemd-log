@@ -1,0 +1,32 @@
+{
+  "name": "systemd-log",
+  "description": "Cookie session management for Bun",
+  "version": "1.0.7",
+  "module": "index.ts",
+  "type": "module",
+  "author": "aabccd021",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aabccd021/systemd-log.git"
+  },
+  "keywords": [
+    "bun",
+    "web",
+    "cookie",
+    "session"
+  ],
+  "bugs": {
+    "url": "https://github.com/aabccd021/systemd-log/issues"
+  },
+  "scripts": {
+    "postinstall": "cd $(dirname $npm_package_json) && nix run .#bun2nix > bun.nix"
+  },
+  "homepage": "https://github.com/aabccd021/systemd-log#readme",
+  "files": [
+    "index.ts"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
